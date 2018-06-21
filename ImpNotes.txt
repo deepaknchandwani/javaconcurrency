@@ -1,0 +1,16 @@
+
+Must Read 
+
+http://tutorials.jenkov.com/java-concurrency/volatile.html
+
+	Variable Visibility Problems
+	The Java volatile Visibility Guarantee
+	Full volatile Visibility Guarantee
+	Instruction Reordering Challenges
+	The Java volatile Happens-Before Guarantee
+	volatile is Not Always Enough
+	When is volatile Enough?
+	Performance Considerations of volatile
+
+
+http://tutorials.jenkov.com/java-concurrency/thread-signaling.html

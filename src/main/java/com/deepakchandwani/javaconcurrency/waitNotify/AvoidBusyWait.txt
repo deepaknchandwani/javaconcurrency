@@ -1,0 +1,24 @@
+
+
+Picked from Here
+http://tutorials.jenkov.com/java-concurrency/thread-signaling.html
+					^
+					|
+					|
+					|
+					must read 
+
+Busy Wait
+Thread B which is to process the data is waiting for data to become available for processing.
+In other words, it is waiting for a signal from thread A which causes hasDataToProcess() to return true. 
+Here is the loop that thread B is running in, while waiting for this signal:
+
+protected MySignal sharedSignal = ...
+
+...
+
+while(!sharedSignal.hasDataToProcess()){
+  //do nothing... busy waiting
+}
+Notice how the while loop keeps executing until hasDataToProcess() returns true. 
+This is called busy waiting. The thread is busy while waiting.

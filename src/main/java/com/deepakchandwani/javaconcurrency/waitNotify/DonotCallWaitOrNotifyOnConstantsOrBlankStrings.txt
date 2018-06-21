@@ -1,0 +1,34 @@
+
+Don't call wait() on constant String's or global objects
+An earlier version of this text had an edition of the MyWaitNotify example class which used a constant string ( "" )
+ as monitor object. Here is how that example looked:
+
+public  class MyWaitNotify{
+
+  String myMonitorObject = "";
+  boolean wasSignalled = false;
+
+  public void doWait(){
+    synchronized(myMonitorObject){
+      while(!wasSignalled){
+        try{
+          myMonitorObject.wait();
+         } catch(InterruptedException e){...}
+      }
+      //clear signal and continue running.
+      wasSignalled = false;
+    }
+  }
+
+  public void doNotify(){
+    synchronized(myMonitorObject){
+      wasSignalled = true;
+      myMonitorObject.notify();
+    }
+  }
+}
+The problem with calling wait() and notify() on the empty string, or any other constant string is,
+that the JVM/Compiler internally translates constant strings into the same object. 
+That means, that even if you have two different MyWaitNotify instances, they both reference the
+same empty string instance. This also means that threads calling doWait() on the 
+first MyWaitNotify instance risk being awakened by doNotify() calls on the second MyWaitNotify instance.
